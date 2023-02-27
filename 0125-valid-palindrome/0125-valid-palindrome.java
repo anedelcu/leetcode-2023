@@ -1,24 +1,15 @@
 class Solution {
+
     public boolean isPalindrome(String s) {
-        StringBuilder sb = new StringBuilder();
-        for(char ch : s.toCharArray()) {
-            if(Character.isLetter(ch) || Character.isDigit(ch)) {
-                sb.append(Character.toLowerCase(ch));
-            }
-        }
-        System.out.println(sb.toString());
-        return isPalindromeS(sb.toString());
-    }
-    
-    public boolean isPalindromeS(String s) {
-        int left = 0;
-        int right = s.length() - 1;
-        while(left < right) {
-            if(s.charAt(left) != s.charAt(right)) {
+        // Convert to lowercase and remove non-alphanumeric characters
+        s = s.toLowerCase().replaceAll("[^a-z0-9]", "");
+
+        // Check if the string is the same when read backwards
+        int n = s.length();
+        for (int i = 0; i < n / 2; i++) {
+            if (s.charAt(i) != s.charAt(n - i - 1)) {
                 return false;
             }
-            left++;
-            right--;
         }
         return true;
     }
