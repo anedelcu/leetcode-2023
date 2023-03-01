@@ -4,8 +4,8 @@ class Solution {
         StringBuilder result = new StringBuilder();
         while (columnNumber > 0) {
             columnNumber--;
-            int remainder = columnNumber % 26;
-            result.insert(0, (char) (remainder + 'A'));
+            int lastCh = columnNumber % 26;
+            result.insert(0, (char) (lastCh + 'A'));
             columnNumber /= 26;
         }
         return result.toString();
