@@ -13,15 +13,15 @@ class Solution {
         if(head == null || head.next == null) {
             return head;
         }
-        ListNode curr = new ListNode(head.val);
+        ListNode reverse = new ListNode(head.val);
         head = head.next;
         while(head != null) {
             ListNode temp = new ListNode(head.val);
-            temp.next = curr;
-            curr = temp;
+            temp.next = reverse;
+            reverse = temp;
             head = head.next;
         }
         
-        return curr;
+        return reverse;
     }
 }
