@@ -20,9 +20,7 @@ class Solution {
             else {
                 s += left;
             }
-
             result.add(s);
-            System.out.println("i = " + i);
             if(i == nums.length - 2) {
                 result.add(String.valueOf(nums[i + 1]));
             }
