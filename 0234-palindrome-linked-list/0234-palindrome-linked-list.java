@@ -14,24 +14,43 @@ class Solution {
         if(head == null || head.next == null) {
             return true;
         }
-        StringBuilder sb = new StringBuilder();
-        while(head != null) {
-            sb.append(String.valueOf(head.val));
-            head = head.next;
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return isPalindrome(sb.toString());
-    }
-    
-    public boolean isPalindrome(String s) {
-        int i = 0;
-        int j = s.length() - 1;
-        while(i < j) {
-            if(s.charAt(i) != s.charAt(j)) {
+        slow = reverse(slow);
+        while(slow != null) {
+            if(slow.val != head.val) {
                 return false;
             }
-            i++;
-            j--;
+            slow = slow.next;
+            head = head.next;
         }
         return true;
     }
+    
+    public ListNode reverse(ListNode head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode prev = null;
+        ListNode curr = head;
+        while(curr != null) {
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        return prev;
+    }
+    
+    // public void printList(ListNode head) {
+    //     while(head.next != null) {
+    //         System.out.print(head.val + " -> ");
+    //         head = head.next;
+    //     }
+    //     System.out.print(head.val);
+    // }
 }
