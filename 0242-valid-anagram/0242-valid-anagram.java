@@ -4,23 +4,16 @@ class Solution {
         if (s.length() != t.length()) {
             return false;
         }
-        Map<Character, Integer> map = new HashMap<>();
-        for (char ch : s.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        int[] letters = new int[26];
+        for(int i = 0; i < s.length(); i++) {
+            letters[s.charAt(i)  -  'a']++;
+            letters[t.charAt(i)  -  'a']--;
         }
-        for (char ch : t.toCharArray()) {
-            if(!map.containsKey(ch)){
+        for(int i = 0; i < 26; i++) {
+            if(letters[i] != 0) {
                 return false;
             }
-            int freq = map.get(ch);
-            if(freq == 1) {
-                map.remove(ch);
-            }
-            else {
-                map.put(ch, freq - 1);
-            }
         }
-        
-        return map.isEmpty();
+        return true;
     }
 }
