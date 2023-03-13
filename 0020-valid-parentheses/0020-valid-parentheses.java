@@ -2,35 +2,27 @@ class Solution {
 
     public static boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
-        for(char c : s.toCharArray()) {
-            if(stack.isEmpty() ) {
-                if(c == ')' || c == ']' || c == '}') {
+        for (char c : s.toCharArray()) {
+            if (stack.isEmpty()) {
+                if (c == ')' || c == ']' || c == '}') {
                     return false;
-                }
-                else {
+                } else {
                     stack.push(c);
                 }
-                
-            }
-            else {
+            } else {
                 char last = stack.peek();
-                if(c == '(' || c == '{' || c == '[') {
+                if (c == '(' || c == '{' || c == '[') {
                     stack.push(c);
-                }
-                else if(last == '(' && c == ')') {
+                } else if (last == '(' && c == ')') {
                     stack.pop();
-                }
-                else if(last == '[' && c == ']') {
+                } else if (last == '[' && c == ']') {
                     stack.pop();
-                }
-                else if(last == '{' && c == '}') {
+                } else if (last == '{' && c == '}') {
                     stack.pop();
-                }
-                else {
+                } else {
                     return false;
                 }
-                
-            }            
+            }
         }
         return stack.isEmpty();
     }
