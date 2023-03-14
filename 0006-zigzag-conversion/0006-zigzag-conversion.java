@@ -1,28 +1,52 @@
 class Solution {
+
     public String convert(String s, int numRows) {
-        if(numRows == 1 || numRows >= s.length()) {
+        if (numRows == 1) {
             return s;
         }
-        StringBuilder[] sb = new StringBuilder[numRows];
-        for(int i = 0; i < sb.length; i++) {
-            sb[i] = new StringBuilder();
+
+        int n = s.length();
+        int sections = (int) Math.ceil(n / (2 * numRows - 2.0));
+        int numCols = sections * (numRows - 1);
+
+        char[][] matrix = new char[numRows][numCols];
+        for (char[] row : matrix) {
+            Arrays.fill(row, ' ');
         }
-        int i = 0;
-        int direction = 1;
-        for(char c : s.toCharArray()){
-            sb[i].append(c);
-            if(i == 0) {
-                direction = 1;
+
+        int currRow = 0, currCol = 0;
+        int currStringIndex = 0;
+
+        // Iterate in zig-zag pattern on matrix and fill it with string characters.
+        while (currStringIndex < n) {
+            // Move down.
+            while (currRow < numRows && currStringIndex < n) {
+                matrix[currRow][currCol] = s.charAt(currStringIndex);
+                currRow++;
+                currStringIndex++;
             }
-            else if(i == numRows - 1) {
-                direction = -1;
+
+            currRow -= 2;
+            currCol++;
+
+            // Move up (with moving right also).
+            while (currRow > 0 && currCol < numCols && currStringIndex < n) {
+                matrix[currRow][currCol] = s.charAt(currStringIndex);
+                currRow--;
+                currCol++;
+                currStringIndex++;
             }
-            i = i + direction;
         }
-        StringBuilder result = new StringBuilder();
-        for(StringBuilder row : sb) {
-            result.append(row);
+
+        StringBuilder answer = new StringBuilder();
+        for (char[] row : matrix) {
+            for (char character : row) {
+                if (character != ' ') {
+                    answer.append(character);
+                }
+            }
         }
-        return result.toString();
+
+        return answer.toString();
     }
 }
