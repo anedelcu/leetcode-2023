@@ -22,24 +22,22 @@ class Solution {
         List<Integer> result = new ArrayList<>();
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
-        int level = 0;
         while (!q.isEmpty()) {
-            int levelSize = q.size();
-            
-            TreeNode lastNode =null;
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode t = q.poll();
-                if (t.left != null) {
-                    q.add(t.left);
+            int size = q.size();
+            TreeNode rightNode = null;
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = q.poll();
+                 rightNode = temp;
+                if (temp.left != null) {
+                    q.add(temp.left);
                 }
-                if (t.right != null) {
-                    q.add(t.right);
+                if (temp.right != null) {
+                    q.add(temp.right);
                 }
-                lastNode = t;
             }
-            result.add(lastNode.val);
-
+            result.add(rightNode.val);
         }
+
         return result;
     }
 }
