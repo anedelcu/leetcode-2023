@@ -10,17 +10,17 @@ class Solution {
                     stack.push(c);
                 }
             } else {
-                char last = stack.peek();
-                if (c == '(' || c == '{' || c == '[') {
+                if (c == '(' || c == '[' || c == '{') {
                     stack.push(c);
-                } else if (last == '(' && c == ')') {
-                    stack.pop();
-                } else if (last == '[' && c == ']') {
-                    stack.pop();
-                } else if (last == '{' && c == '}') {
-                    stack.pop();
                 } else {
-                    return false;
+                    char ch = stack.pop();
+                    if (ch == '(' && c != ')') {
+                        return false;
+                    } else if (ch == '[' && c != ']') {
+                        return false;
+                    } else if (ch == '{' && c != '}') {
+                        return false;
+                    }
                 }
             }
         }
