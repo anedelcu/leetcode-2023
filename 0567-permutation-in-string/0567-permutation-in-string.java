@@ -1,34 +1,20 @@
 class Solution {
     public boolean checkInclusion( String pattern, String str) {
-        Map<Character,Integer> map = new HashMap<>();
-        int count = 0;
-        int start = 0;
-
-        for(char c: pattern.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        if (pattern == null || str == null || pattern.length() > str.length()) {
+            return false;
         }
-
-        for(int end = 0; end < str.length(); end++) {
-            char c = str.charAt(end);
-            if(map.containsKey(c)) {
-                map.put(c, map.getOrDefault(c, 0) - 1);
-                if(map.get(c) == 0) {
-                    count++;
-                }
+        int[] count1 = new int[26];
+        int[] count2 = new int[26];
+        for (char c : pattern.toCharArray()) {
+            count1[c - 'a']++;
+        }
+        for (int i = 0; i < str.length(); i++) {
+            if (i >= pattern.length()) {
+                count2[str.charAt(i - pattern.length()) - 'a']--;
             }
-
-            if(count == map.size()) {
+            count2[str.charAt(i) - 'a']++;
+            if (Arrays.equals(count1, count2)) {
                 return true;
-            }
-            if(end >= pattern.length() - 1) {
-                char leftChar = str.charAt(start);
-                if(map.containsKey(leftChar)) {
-                    if(map.get(leftChar) == 0) {
-                        count--;
-                    }
-                    map.put(leftChar, map.getOrDefault(leftChar, 0) + 1);
-                }
-                start++;
             }
         }
         return false;
