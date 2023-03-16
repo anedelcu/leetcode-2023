@@ -16,17 +16,35 @@
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        postorder(result, root);
-        return result;
-        
-    }
-    
-    private void postorder(List<Integer> list, TreeNode root) {
         if(root == null) {
-            return;
+            return result;
         }
-        postorder(list, root.left);
-        postorder(list, root.right);
-        list.add(root.val);
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode prev = null;
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            TreeNode curr = stack.peek();
+            if(prev == null || prev.left == curr || prev.right == curr) {
+                if(curr.left != null) {
+                    stack.push(curr.left);
+                }
+                else if(curr.right != null) {
+                    stack.push(curr.right);
+                }
+            }
+            else if(curr.left == prev) {
+                if(curr.right != null) {
+                    stack.push(curr.right);
+                }
+            }
+            else {
+                result.add(curr.val);
+                stack.pop();
+            }
+            prev = curr;
+        }
+        
+        return result;
+    
     }
 }
