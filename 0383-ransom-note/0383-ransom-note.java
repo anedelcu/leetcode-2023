@@ -11,7 +11,6 @@ class Solution {
             map.put(c, map.getOrDefault(c, 0) - 1);
         }
         for(int val : map.values()) {
-            System.out.println(val);
             if(val < 0) {
                 return false;
             }
