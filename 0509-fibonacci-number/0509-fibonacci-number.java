@@ -6,7 +6,17 @@ class Solution {
         if(n == 1) {
             return 1;
         }
-        return fib(n - 1) + fib(n - 2);
-        
+        int fib1 = 0;
+        int fib2 = 1;
+        int i = 3;
+        int fib = fib1 + fib2;
+        while(i <= n) {
+            fib1 = fib2;
+            fib2 = fib;
+            fib = fib1 + fib2;
+            
+            i++;
+        }
+        return fib;
     }
 }
