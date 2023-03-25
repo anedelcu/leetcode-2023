@@ -4,15 +4,15 @@ class Solution {
         if(s.length() != t.length()) {
             return false;
         }
-        Map<Character, Integer> map = new HashMap<>();
+        int[] count  = new int[26];
         for(char c : s.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+            count[c - 'a']++;
         }
         for(char c : t.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) - 1);
+            count[c - 'a']--;
         }
-        for(int val : map.values()) {
-            if(val != 0) {
+        for(int n : count) {
+            if(n != 0) {
                 return false;
             }
         }
