@@ -1,20 +1,20 @@
 class Solution {
     public boolean isHappy(int n) {
 
-        while(true) {
-            int sum = 0;
-            String numString = String.valueOf(n);
-            for(int i= 0; i < numString.length(); i++) {
-                int digit = Character.getNumericValue(numString.charAt(i));
-                sum += digit * digit;
-            }
-            n = sum;
-            if(n == 1) {
-                return true;
-            }
-            else if(n == 4) {
-                return false;
-            }
+        Set<Integer> set = new HashSet<>();
+        if(n == 1) {
+            return true;
         }
+        while(n != 1 && !set.contains(n)) {
+            set.add(n);
+            int sum = 0;
+            while(n > 0) {
+                sum += Math.pow(n % 10, 2);
+                n /= 10;
+            }
+            n = sum;            
+        }
+        return n == 1;
+        
     }
 }
