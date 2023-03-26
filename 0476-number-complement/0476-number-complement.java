@@ -11,7 +11,6 @@ class Solution {
 
         // flip all bits in num up to the highest set bit
         int mask = (1 << highestBit) - 1;
-        System.out.println("mask = " + mask);
         num ^= mask;
 
         return num;
