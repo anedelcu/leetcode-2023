@@ -6,11 +6,12 @@ class Solution {
         int temp = num;
         while (temp != 0) {
             highestBit++;
-            temp >>= 1;
+            temp = temp >> 1;
         }
 
         // flip all bits in num up to the highest set bit
         int mask = (1 << highestBit) - 1;
+        System.out.println("mask = " + mask);
         num ^= mask;
 
         return num;
