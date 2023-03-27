@@ -31,7 +31,7 @@ class Solution {
             count += n;
         }
         
-        return (int) (count % (long)(1e9 + 7));
+        return (int) (count % 1000000007);
     }
     
 }
