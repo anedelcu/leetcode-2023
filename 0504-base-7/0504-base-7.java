@@ -3,7 +3,7 @@ class Solution {
         if(num == 0) {
             return "0";
         }
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder();
         boolean sign = false;
         if(num < 0) {
             sign = true;
