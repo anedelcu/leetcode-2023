@@ -6,8 +6,13 @@ class Solution {
         int[] sortedScore = score.clone();
         Arrays.sort(sortedScore);
         int n = score.length;
+        Map<Integer, Integer> ranks = new HashMap<>();
+        for(int i = 0; i < sortedScore.length; i++) {
+            ranks.put(sortedScore[i], n - i);
+        }
         for (int i = 0; i < score.length; i++) {
-            int rank  = n - Arrays.binarySearch(sortedScore, score[i]);
+            
+            int rank  = ranks.get(score[i]);
             if (rank == 1) {
                 result[i] = "Gold Medal";
             } else if (rank == 2) {
