@@ -6,21 +6,24 @@ class Solution {
         List<Integer> divisors = divisors(num);
         int sum = 0;
         for(int div : divisors) {
+             System.out.println("div = " + div);
             sum += div;
         }
+        System.out.println("sum = " + sum);
         return sum == num;
     }
     
     private List<Integer> divisors(int n) {
         List<Integer> res = new ArrayList<>();
-        int div = n / 2;
-        while(div > 1) {
-            if(n % div == 0) {
-                res.add(div);
+        int sqrt = (int)Math.sqrt(n);
+        for(int i = 1; i <= sqrt; i++) {
+            if(n % i == 0) {
+                res.add(i);
+                if(i * i != n && n / i != n) {
+                    res.add(n / i);
+                }
             }
-            div--;
         }
-        res.add(1);
         return res;
     }
 }
