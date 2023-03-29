@@ -13,8 +13,8 @@ class Solution {
     
     private List<Integer> divisors(int n) {
         List<Integer> res = new ArrayList<>();
-        int sqrt = (int)Math.sqrt(n);
-        for(int i = 2; i <= sqrt; i++) {
+        //int sqrt = (int)Math.sqrt(n);
+        for(int i = 2; i * i <= n; i++) {
             if(n % i == 0) {
                 res.add(i);
                 if(i * i != n) {
