@@ -6,10 +6,8 @@ class Solution {
         List<Integer> divisors = divisors(num);
         int sum = 0;
         for(int div : divisors) {
-             System.out.println("div = " + div);
             sum += div;
         }
-        System.out.println("sum = " + sum);
         return sum == num;
     }
     
