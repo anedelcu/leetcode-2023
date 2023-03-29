@@ -14,14 +14,15 @@ class Solution {
     private List<Integer> divisors(int n) {
         List<Integer> res = new ArrayList<>();
         int sqrt = (int)Math.sqrt(n);
-        for(int i = 1; i <= sqrt; i++) {
+        for(int i = 2; i <= sqrt; i++) {
             if(n % i == 0) {
                 res.add(i);
-                if(i * i != n && n / i != n) {
+                if(i * i != n) {
                     res.add(n / i);
                 }
             }
         }
+        res.add(1);
         return res;
     }
 }
