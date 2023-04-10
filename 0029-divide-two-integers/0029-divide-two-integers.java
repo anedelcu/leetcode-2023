@@ -1,34 +1,45 @@
 class Solution {
 
     public int divide(int dividend, int divisor) {
-        if (dividend == 0) {
-            return 0;
+        // Handle the special case of dividing by zero
+        if (divisor == 0) {
+            return Integer.MAX_VALUE;
         }
-        int sign = 1;
-        if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) {
-            sign = -1;
-            System.out.println("sign: " + sign);
+
+        // Handle the special case of dividing the smallest possible integer by -1
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
         }
-        
-        if ((dividend < 0 && divisor < 0)) {
-            sign = 1;
+
+        // Compute the sign of the quotient
+        int sign = (dividend < 0) ^ (divisor < 0) ? -1 : 1;
+
+        // Convert dividend and divisor to positive long integers to handle overflow
+        long absDividend = Math.abs((long) dividend);
+        long absDivisor = Math.abs((long) divisor);
+
+        // Initialize the quotient to zero
+        int quotient = 0;
+
+        // Perform long division
+        for (int i = 31; i >= 0; i--) {
+            if ((absDividend >> i) >= absDivisor) {
+                // If the dividend is greater than or equal to the divisor multiplied by 2^i, subtract that product from the dividend and add 2^i to the quotient
+                absDividend -= absDivisor << i;
+                quotient += 1 << i;
+            }
         }
-        long absDividend = Math.abs((long)dividend);
-        long absDivisor = Math.abs((long)divisor);
-        int count = 0;
-        long result = 0;
-        if(absDivisor == 1) {
-            result = absDividend * sign;
-            System.out.println("result: " + result);
-            result = (result > Integer.MAX_VALUE) ? Integer.MAX_VALUE : (result < Integer.MIN_VALUE) ? Integer.MIN_VALUE : result;
-            return (int)result;
+
+        // Apply the sign to the quotient
+        quotient *= sign;
+
+        // Handle the case where the quotient overflows
+        if (quotient > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        } else if (quotient < Integer.MIN_VALUE) {
+            return Integer.MIN_VALUE;
+        } else {
+            return quotient;
         }
-        while (absDividend >= absDivisor) {
-            absDividend -= absDivisor;
-            count++;
-        }
-        result = sign * count;
-        result = (result > Integer.MAX_VALUE) ? Integer.MAX_VALUE : (result < Integer.MIN_VALUE) ? Integer.MIN_VALUE : result;
-        return (int)result;
     }
 }
