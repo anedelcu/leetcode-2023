@@ -9,13 +9,15 @@ class Solution {
             }
         }
         String lp = sb.toString().toLowerCase();
-        Arrays.sort(words, (a, b)->Integer.compare(a.length(), b.length()));
+        StringBuilder res = new StringBuilder();
+        int minLength = 15;
         for(String word : words) {
-            if(isCompleting(lp, word)) {
-                return word;
+            if(isCompleting(lp, word) && word.length() < minLength) {
+                res = new StringBuilder(word);
+                minLength = word.length();
             }
         }
-        return "";
+        return res.toString();
     }
     
     public boolean isCompleting(String lp, String w) {
