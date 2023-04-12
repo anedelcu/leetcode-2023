@@ -8,17 +8,12 @@ class Solution {
             if(nums[i] > max) {
                 max2 = max;
                 max = nums[i];
-                max2Index = maxIndex;
                 maxIndex = i;
             }
             else if(nums[i] > max2) {
                 max2 = nums[i];
-                max2Index = i;
             }
         }
-        System.out.println("max = " + max);
-        System.out.println("max2 = " + max2);
-        System.out.println("max2Index = " + max2Index);
         if(max >= (max2 + max2)) {
             return maxIndex;
         }
