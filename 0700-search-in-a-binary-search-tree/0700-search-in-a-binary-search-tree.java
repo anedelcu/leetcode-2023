@@ -22,11 +22,9 @@ class Solution {
             return root;
         }
         else if(val < root.val){
-            System.out.println("Inside else if");
             return searchBST(root.left, val);
         }
         else {
-            System.out.println("Inside else");
             return searchBST(root.right, val);
         }
     }
