@@ -12,14 +12,7 @@ class Solution {
                 map.put(word, map.getOrDefault(word, 0) + 1);
             }
         }
-        int max = 0;
-        String result = "";
-        for(String key : map.keySet()) {
-            if(map.get(key) > max){
-                max = map.get(key);
-                result = new String(key);
-            }
-        }
-        return result;
+        
+        return Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 }
