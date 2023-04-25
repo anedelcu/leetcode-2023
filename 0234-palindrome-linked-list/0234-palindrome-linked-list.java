@@ -16,16 +16,17 @@ class Solution {
         }
         ListNode slow = head;
         ListNode fast = head;
+        ListNode reversed = null;
         while(fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
-        slow = reverse(slow);
-        while(slow != null) {
-            if(slow.val != head.val) {
+        reversed = reverse(slow);
+        while(reversed != null) {
+            if(reversed.val != head.val) {
                 return false;
             }
-            slow = slow.next;
+            reversed = reversed.next;
             head = head.next;
         }
         return true;
@@ -43,7 +44,8 @@ class Solution {
             prev = curr;
             curr = temp;
         }
-        return prev;
+        head = prev;
+        return head;
     }
     
     // public void printList(ListNode head) {
