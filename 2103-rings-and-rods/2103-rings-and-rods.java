@@ -11,9 +11,6 @@ class Solution {
             map.put(rod, set);
         }
         for(Set<Character> s : map.values()) {
-            System.out.println(s);
-        }
-        for(Set<Character> s : map.values()) {
             if(s.size() == 3) {
                 res++;
             }
