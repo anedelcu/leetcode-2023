@@ -1,30 +1,42 @@
 class Solution {
+
     public String minWindow(String s, String t) {
-        Map<Character, Integer> tFreq = new HashMap<>();
-        for (char c : t.toCharArray()) {
-            tFreq.put(c, tFreq.getOrDefault(c, 0) + 1);
+        if (s.length() == 0 || t.length() == 0) {
+            return "";
         }
-        int left = 0, right = 0, count = t.length();
-        int minLen = Integer.MAX_VALUE, minStart = 0;
-        Map<Character, Integer> sFreq = new HashMap<>();
-        while (right < s.length()) {
-            char c = s.charAt(right++);
-            sFreq.put(c, sFreq.getOrDefault(c, 0) + 1);
-            if (tFreq.containsKey(c) && sFreq.get(c) <= tFreq.get(c)) {
+        Map<Character, Integer> tMap = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            tMap.put(c, tMap.getOrDefault(c, 0) + 1);
+        }
+        int start = 0;
+        int end = 0;
+        int minLen = Integer.MAX_VALUE;
+        int count = t.length();
+        int minStart = 0;
+        Map<Character, Integer> sMap = new HashMap<>();
+        while (end < s.length()) {
+            char endChar = s.charAt(end);
+            sMap.put(endChar, sMap.getOrDefault(endChar, 0) + 1);
+            if (tMap.containsKey(endChar) && sMap.get(endChar) <= tMap.get(endChar)) {
                 count--;
             }
+
             while (count == 0) {
-                if (right - left < minLen) {
-                    minLen = right - left;
-                    minStart = left;
+                if (end - start < minLen) {
+                    minLen = end - start;
+                    minStart = start;
                 }
-                char d = s.charAt(left++);
-                if (tFreq.containsKey(d) && sFreq.get(d) <= tFreq.get(d)) {
+                char startChar = s.charAt(start++);
+                if (tMap.containsKey(startChar) && sMap.get(startChar) <= tMap.get(startChar)) {
                     count++;
                 }
-                sFreq.put(d, sFreq.getOrDefault(d, 0) - 1);
+                sMap.put(startChar, sMap.getOrDefault(startChar, 0) - 1);
             }
+            end++;
         }
-        return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);
+        if (minLen == Integer.MAX_VALUE) {
+            return "";
+        }
+        return s.substring(minStart, minStart + minLen + 1);
     }
 }
