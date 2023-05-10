@@ -3,11 +3,11 @@ class Solution {
         int n = nums.length;
         int res = 0;
         for(int i = 0; i < n; i++) {
-            if(isPrime(nums[i][i])) {
-                res = Math.max(res, nums[i][i]);
+            if(isPrime(nums[i][i]) && nums[i][i] >= res ) {
+                res = nums[i][i];
             }
-            if(isPrime(nums[i][n - i - 1])) {
-                res = Math.max(res, nums[i][n - i - 1]);
+            if(isPrime(nums[i][n - i - 1]) && nums[i][n - i - 1] >= res ) {
+                res = nums[i][n - i - 1];
             }
         }
         return res;
