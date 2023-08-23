@@ -4,8 +4,6 @@ class Solution {
         int left = 0;
         int right = str.length() - 1;
         String str1 = str.toLowerCase();
-        System.out.println(str);
-        System.out.println(str1);
         while(left < right) {
             if(str1.charAt(left) != str1.charAt(right)) {
                 return false;
