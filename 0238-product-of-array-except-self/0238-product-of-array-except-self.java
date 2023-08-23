@@ -5,7 +5,6 @@ class Solution {
         int prefix = 1;
         int postfix = 1;
         int[] result = new int[n];
-        Arrays.fill(result, 1);
         for (int i = 0; i < n; i++) {
             result[i] = prefix;
             prefix = prefix * nums[i];
