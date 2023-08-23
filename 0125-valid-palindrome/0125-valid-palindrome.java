@@ -3,9 +3,11 @@ class Solution {
         String str = s.replaceAll("[^a-zA-Z0-9]","");
         int left = 0;
         int right = str.length() - 1;
-        String str1 = str.toLowerCase();
+        
         while(left < right) {
-            if(str1.charAt(left) != str1.charAt(right)) {
+            char c1 = Character.toLowerCase(str.charAt(left));
+            char c2 = Character.toLowerCase(str.charAt(right));
+            if(c1 != c2) {
                 return false;
             }
             left++;
