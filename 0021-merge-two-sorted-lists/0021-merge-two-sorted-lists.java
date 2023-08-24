@@ -17,17 +17,17 @@ class Solution {
         if (list2 == null) {
             return list1;
         }
-        ListNode result = null;
-        if(list1.val <= list2.val) {
-                result = list1;
-                list1 = list1.next;
-            } else {
-                result = list2;
-                list2 = list2.next;
-            }
-        ListNode curr = result;
-        while(list1 != null && list2 != null) {
-            if(list1.val <= list2.val) {
+        ListNode head = null;
+        if (list1.val <= list2.val) {
+            head = list1;
+            list1 = list1.next;
+        } else {
+            head = list2;
+            list2 = list2.next;
+        }
+        ListNode curr = head;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
                 curr.next = list1;
                 list1 = list1.next;
             } else {
@@ -36,12 +36,12 @@ class Solution {
             }
             curr = curr.next;
         }
-        if(list1 != null) {
-            curr.next = list1;
-        }
-        if(list2 != null) {
+        if(list1 == null) {
             curr.next = list2;
         }
-        return result;
+        if(list2 == null) {
+            curr.next = list1;
+        }
+        return head;
     }
 }
