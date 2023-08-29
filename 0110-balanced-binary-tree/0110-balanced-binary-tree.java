@@ -18,34 +18,19 @@ class Solution {
         if(root == null) {
             return true;
         }
-        if(Math.abs(height(root.left) - height(root.right)) > 1) {
+        int left = 1 + height(root.left);
+        int right = 1 + height(root.right);
+        if (Math.abs(height(root.left) - height(root.right)) > 1) {
             return false;
         }
-        
         return isBalanced(root.left) && isBalanced(root.right);
-        
     }
     
     private int height(TreeNode root) {
-        int h = 0;
-        if(root  == null) {
+        if(root == null) {
             return 0;
         }
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        while(!q.isEmpty()){
-            int size = q.size();
-            for(int i = 0; i < size; i++) {
-                TreeNode temp = q.poll();
-                if(temp.left != null) {
-                    q.add(temp.left);
-                }
-                if(temp.right != null) {
-                    q.add(temp.right);
-                }
-            }
-            h++;
-        }
-        return h;
+        
+        return 1 + Math.max(height(root.left), height(root.right));
     }
 }
