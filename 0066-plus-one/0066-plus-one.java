@@ -12,14 +12,15 @@ class Solution {
                 i--;
             }
         }
-        System.out.println(i);
-        if (i >= 0 && digits[i] != 9) {
-            digits[i]++;
-            return digits;
-        }
-        int[] result = new int[n + 1];
-        result[0] = 1;
 
-        return result;
+        if (digits[0] == 0) {
+            int[] result = new int[n + 1];
+            result[0] = 1;
+            return result;
+        } else {
+            digits[i]++;
+        }
+
+        return digits;
     }
 }
