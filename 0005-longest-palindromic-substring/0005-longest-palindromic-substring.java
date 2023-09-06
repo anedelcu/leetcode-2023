@@ -1,42 +1,38 @@
 class Solution {
-
     public String longestPalindrome(String s) {
-        if (s == null || s.length() < 1) return "";
-        String processed = preprocess(s);
-        int n = processed.length();
-        int[] lengths = new int[n];
-        int center = 0, right = 0;
-        for (int i = 1; i < n - 1; i++) {
-            int mirror = 2 * center - i;
-            if (right > i) {
-                lengths[i] = Math.min(right - i, lengths[mirror]);
+        String pal = "";
+        int maxLen = 0;
+        int n = s.length();
+        int start = 0;
+        int end = 0;
+        
+        
+        for(int i = 0; i < n; i++) {
+            // odd length
+            int left = i;
+            int right = i;
+            while(left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
+                if(right - left + 1 > maxLen) {
+                    maxLen = right -left + 1;
+                    start = left;
+                    end = right;
+                } 
+                left--;
+                right++;
             }
-            while (processed.charAt(i + lengths[i] + 1) == processed.charAt(i - lengths[i] - 1)) {
-                lengths[i]++;
-            }
-            if (i + lengths[i] > right) {
-                center = i;
-                right = i + lengths[i];
+            // even length
+            left = i;
+            right = i + 1;
+            while(left >= 0 && right < n && s.charAt(left) == s.charAt(right)) {
+                if(right - left + 1 > maxLen) {
+                    maxLen = right -left + 1;
+                    start = left;
+                    end = right;
+                } 
+                left--;
+                right++;
             }
         }
-        int maxLen = 0, centerIdx = 0;
-        for (int i = 1; i < n - 1; i++) {
-            if (lengths[i] > maxLen) {
-                maxLen = lengths[i];
-                centerIdx = i;
-            }
-        }
-        return s.substring((centerIdx - maxLen) / 2, (centerIdx + maxLen) / 2);
-    }
-
-    private String preprocess(String s) {
-        StringBuilder sb = new StringBuilder();
-        sb.append('^');
-        for (int i = 0; i < s.length(); i++) {
-            sb.append('#');
-            sb.append(s.charAt(i));
-        }
-        sb.append("#$");
-        return sb.toString();
+        return s.substring(start, end + 1);
     }
 }
