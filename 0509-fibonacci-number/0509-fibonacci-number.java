@@ -6,16 +6,14 @@ class Solution {
         if(n == 1) {
             return 1;
         }
-        int fib1 = 0;
-        int fib2 = 1;
-        int i = 3;
-        int fib = fib1 + fib2;
-        while(i <= n) {
-            fib1 = fib2;
-            fib2 = fib;
-            fib = fib1 + fib2;
+        int f1 = 0;
+        int f2 = 1;
+        int fib = 0;
+        for(int i = 2; i <= n; i++) {
+            fib = f1 + f2;
+            f1 = f2;
+            f2 = fib;
             
-            i++;
         }
         return fib;
     }
