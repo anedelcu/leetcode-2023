@@ -13,7 +13,7 @@ class Solution {
             if (start <= end) {
                 int[] interval = result.remove(index);
                 index--;
-                System.out.println("[" + interval[0] + ", " + interval[1] + "]");
+                //System.out.println("[" + interval[0] + ", " + interval[1] + "]");
                 interval[1] = Math.max(interval[1],intervals[i][1]);
                 result.add(interval);
                 index++;
