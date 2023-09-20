@@ -3,6 +3,10 @@ class Solution {
     public boolean isValidSudoku(char[][] board) {
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
+                char c = board[i][j];
+                if(c != '.') {
+                    continue;
+                }
                 if(!isValid(board, i, j)) {
                     return false;
                 }
