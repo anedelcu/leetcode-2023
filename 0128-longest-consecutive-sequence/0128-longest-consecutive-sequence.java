@@ -9,15 +9,13 @@ class Solution {
             set.add(n);
         }
         for(int n : nums) {
-            int num = n;
-            if(set.contains(num - 1)){
+            if(set.contains(n - 1)){
                continue; 
             }
             else {
-                int seq = 1;
-                while(set.contains(num + 1)) {
+                int seq = 0;
+                while(set.contains(n + seq)) {
                     seq++;
-                    num++;
                 }
                 maxSeq = Math.max(seq, maxSeq);
             }
