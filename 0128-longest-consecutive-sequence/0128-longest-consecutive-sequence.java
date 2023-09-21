@@ -9,10 +9,7 @@ class Solution {
             set.add(n);
         }
         for(int n : nums) {
-            if(set.contains(n - 1)){
-               continue; 
-            }
-            else {
+            if(!set.contains(n - 1)){
                 int seq = 0;
                 while(set.contains(n + seq)) {
                     seq++;
