@@ -19,7 +19,9 @@ class Solution {
                 }
                 maxSeq = Math.max(seq, maxSeq);
             }
-            
+            if(maxSeq > nums.length/2) {
+                break;
+            }
         }
         return maxSeq;
     }
