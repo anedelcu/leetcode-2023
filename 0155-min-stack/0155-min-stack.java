@@ -23,8 +23,7 @@ class MinStack {
     }
 
     public int top() {
-        int res = stack.peek();
-        return res;
+        return stack.peek();
     }
 
     public int getMin() {
