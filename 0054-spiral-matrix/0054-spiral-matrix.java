@@ -1,38 +1,46 @@
 class Solution {
+
     public List<Integer> spiralOrder(int[][] matrix) {
-        List<Integer> result = new ArrayList<>();
-        List<int[]> list = new ArrayList<>();
-        int direction  = 1; // 1 - right. 2 - down, 3 -left, 4 - up
+        int direction = 0; // o - right, 1 - down, 2 - left, 3 - up
         int left = 0;
         int right = matrix[0].length - 1;
-        int top  = 0;
+        int top = 0;
         int bottom = matrix.length - 1;
-        while(left <= right && top <= bottom) {
-            if(direction == 1) {
-                for(int i = left; i <= right; i++) {
+        List<Integer> result = new ArrayList<>();
+        // int size = matrix.length
+        while (left <= right && top <= bottom) {
+            // right
+            if (direction == 0) {
+                for (int i = left; i <= right; i++) {
                     result.add(matrix[top][i]);
                 }
                 top++;
+                direction++;
             }
-            else if(direction == 2) {
-                for(int i = top; i <= bottom; i++) {
+            // down
+            else if (direction == 1) {
+                for (int i = top; i <= bottom; i++) {
                     result.add(matrix[i][right]);
                 }
-                right --;
-            }
-            else if(direction == 3) {
-                for(int i = right; i >= left; i--) {
+                right--;
+                direction++;
+                // left
+            } else if (direction == 2) {
+                for (int i = right; i >= left; i--) {
                     result.add(matrix[bottom][i]);
                 }
-                    bottom--;
+                bottom--;
+                direction++;
             }
+            // up
             else {
-                for(int i = bottom; i >= top; i--) {
+                for (int i = bottom; i >= top; i--) {
                     result.add(matrix[i][left]);
                 }
                 left++;
+                direction++;
             }
-            direction = ( 1 + direction) % 4;
+            direction = direction % 4;
         }
         return result;
     }
