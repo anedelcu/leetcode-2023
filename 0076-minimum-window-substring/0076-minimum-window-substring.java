@@ -1,40 +1,36 @@
 class Solution {
-    int[] tDict = new int[256];
-    int[] sDict = new int[256];
-    char[] sa;
 
+    //sliding window
     public String minWindow(String s, String t) {
-        sa = s.toCharArray();
-        for (int i = 0; i < t.length(); i++) {
-            char c = t.charAt(i);
-            tDict[c - 'A']++;
-        }
-        int minL = Integer.MAX_VALUE;
-        String result = "";
-        int start = 0;
-        for (int end = 0; end < s.length(); end++) {
-            sDict[sa[end] - 'A']++;
-            if (!checkValid()) {
-                continue;
-            }
-            while (checkValid()) {
-                if (end - start + 1 < minL) {
-                    minL = end - start + 1;
-                    result = s.substring(start, end + 1);
-                }
-                sDict[sa[start] - 'A']--;
-                start++;
-            }
-        }
-        return result;
-    }
+        HashMap<Character, Integer> map = new HashMap<>();
 
-    private boolean checkValid() {
-        for (int i = 0; i < tDict.length; i++) {
-            if (tDict[i] > 0 && sDict[i] < tDict[i]) {
-                return false;
+        for (char x : t.toCharArray()) {
+            map.put(x, map.getOrDefault(x, 0) + 1);
+        }
+
+        int matched = 0;
+        int start = 0;
+        int minLen = s.length() + 1;
+        int subStr = 0;
+        for (int endWindow = 0; endWindow < s.length(); endWindow++) {
+            char right = s.charAt(endWindow);
+            if (map.containsKey(right)) {
+                map.put(right, map.get(right) - 1);
+                if (map.get(right) == 0) matched++;
+            }
+
+            while (matched == map.size()) {
+                if (minLen > endWindow - start + 1) {
+                    minLen = endWindow - start + 1;
+                    subStr = start;
+                }
+                char deleted = s.charAt(start++);
+                if (map.containsKey(deleted)) {
+                    if (map.get(deleted) == 0) matched--;
+                    map.put(deleted, map.get(deleted) + 1);
+                }
             }
         }
-        return true;
+        return minLen > s.length() ? "" : s.substring(subStr, subStr + minLen);
     }
 }
