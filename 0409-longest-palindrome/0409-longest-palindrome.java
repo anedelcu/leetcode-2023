@@ -1,18 +1,29 @@
 class Solution {
-
     public int longestPalindrome(String s) {
-        int[] count = new int[128];
-        int result = 0;
-        for (char c : s.toCharArray()) {
-            count[c]++;
+        if(s == null || s.equals("")) {
+            return 0;
         }
-        for (int num : count) {
-            if (num > 1 && num % 2 == 0) {
-                result += num;
-            } else if (num > 1 && num % 2 == 1) {
-                result += num - 1;
+        
+        int res = 0;
+        int ones = 0;
+        int[] freq = new int[128];
+        for(char c : s.toCharArray()) {
+            if(Character.isLowerCase(c)) {
+                freq[c]++;
+            }
+            else {
+                freq[c]++;
             }
         }
-        return s.length() == result ? result : result + 1;
+        for(int i = 0; i < 128; i++) {
+            if(freq[i] > 1 && freq[i] % 2 == 0) {
+                res += freq[i];
+            }
+            else if(freq[i] > 1 && freq[i] % 2 != 0) {
+                res += freq[i] - 1;
+            }
+            
+        }
+        return res == s.length() ? res : res + 1;
     }
 }
