@@ -1,16 +1,23 @@
 class Solution {
+
     public int numUniqueEmails(String[] emails) {
-        Set<String> set = new HashSet();
-        int count=0;
-        for(String email: emails){
-            int atIndex = email.indexOf("@");
-            int plusIndex= email.indexOf("+");
-            String str1 = "";
-            if(plusIndex>=0) str1 = email.substring(0,plusIndex);
-            else str1 = email.substring(0,atIndex);
-            str1 = str1.replace(".","") + email.substring(atIndex);
-            if(set.add(str1)) count++;
+        Set<String> uniqueEmails = new HashSet<>();
+
+        for (String email : emails) {
+            String[] parts = email.split("@");
+            String localName = parts[0];
+            String domainName = parts[1];
+
+            // Remove dots in the local name
+            localName = localName.replace(".", "");
+
+            // Ignore everything after the first plus sign
+            localName = localName.split("\\+")[0];
+
+            // Add the modified email to the set of unique emails
+            uniqueEmails.add(localName + "@" + domainName);
         }
-        return count;
+
+        return uniqueEmails.size();
     }
 }
