@@ -1,33 +1,27 @@
 class Solution {
 
+    // Returns the elements in the first arg nums1 that don't exist in the second arg nums2.
+    List<Integer> getElementsOnlyInFirstList(int[] nums1, int[] nums2) {
+        Set<Integer> onlyInNums1 = new HashSet<>();
+
+        // Store nums2 elements in an unordered set.
+        Set<Integer> existsInNums2 = new HashSet<>();
+        for (int num : nums2) {
+            existsInNums2.add(num);
+        }
+
+        // Iterate over each element in the list nums1.
+        for (int num : nums1) {
+            if (!existsInNums2.contains(num)) {
+                onlyInNums1.add(num);
+            }
+        }
+
+        // Convert to vector.
+        return new ArrayList<>(onlyInNums1);
+    }
+
     public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
-        List<List<Integer>> res = new ArrayList<>();
-
-        List<Integer> num1 = new ArrayList<>();
-        for (int n : nums1) num1.add(n);
-
-        List<Integer> num2 = new ArrayList<>();
-        for (int n : nums2) num2.add(n);
-
-        Set<Integer> set1 = new HashSet<>();
-        Set<Integer> set2 = new HashSet<>();
-
-        //Because we need to return result in 2 list of the result list, therefore we are creating these placeholders
-        res.add(new ArrayList<>());
-        res.add(new ArrayList<>());
-
-        for (int i = 0; i < nums1.length; i++) {
-            if (!num2.contains(nums1[i])) set1.add(nums1[i]);
-        }
-
-        for (int i = 0; i < nums2.length; i++) {
-            if (!num1.contains(nums2[i])) set2.add(nums2[i]);
-        }
-
-        for (int n : set1) res.get(0).add(n);
-
-        for (int n : set2) res.get(1).add(n);
-
-        return res;
+        return Arrays.asList(getElementsOnlyInFirstList(nums1, nums2), getElementsOnlyInFirstList(nums2, nums1));
     }
 }
