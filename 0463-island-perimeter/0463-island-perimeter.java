@@ -1,31 +1,31 @@
 class Solution {
 
     public int islandPerimeter(int[][] grid) {
-        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        int p = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] == 1) {
-                    return dfs(i, j, grid, visited);
+                if(grid[i][j] == 1) {
+                    p += 4;
+                    if(i - 1 >= 0 && grid[i - 1][j] == 1) {
+                        p -= 1;
+                    }
+                    if(j - 1 >= 0 && grid[i][j - 1] == 1) {
+                        p -= 1;
+                    }
+                    if(i + 1 < grid.length && grid[i + 1][j] == 1) {
+                        p -= 1;
+                    }
+                    if(j + 1 < grid[0].length && grid[i][j + 1] == 1) {
+                        p -= 1;
+                    }
+                    
                 }
+                
+                
             }
         }
-        return -1;
+        return p;
     }
 
-    private int dfs(int i, int j, int[][] grid, boolean[][] visited) {
-        int perim = 0;
-        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == 0) {
-            return 1;
-        }
-        if (visited[i][j]) {
-            return 0;
-        }
-        visited[i][j] = true;
-        perim += dfs(i, j + 1, grid, visited);
-        perim += dfs(i + 1, j, grid, visited);
-        perim += dfs(i, j - 1, grid, visited);
-        perim += dfs(i - 1, j, grid, visited);
-
-        return perim;
-    }
+   
 }
