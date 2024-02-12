@@ -14,16 +14,16 @@
  * }
  */
 class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        if(p == null && q == null) {
+    public boolean isSameTree(TreeNode t1, TreeNode t2) {
+        if(t1 == null && t2 == null) {
             return true;
         }
-        if(p == null || q == null) {
+        if(t1 == null || t2 == null) {
             return false;
         }
-        if(p.val != q.val) {
+        if(t1.val != t2.val) {
             return false;
         }
-        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        return isSameTree(t1.left, t2.left) && isSameTree(t1.right, t2.right);
     }
 }
