@@ -13,7 +13,6 @@ class Solution {
             inverse = inverse * 10 + d;
             x /= 10;
         }
-        System.out.println("Inverse = " + inverse);
         return inverse == n;
     }
 }
