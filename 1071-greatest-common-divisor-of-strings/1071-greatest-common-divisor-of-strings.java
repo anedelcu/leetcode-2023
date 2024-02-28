@@ -19,15 +19,12 @@ class Solution {
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         String s = str1.substring(0, len);
-        System.out.println("s = " + s);
-        for (int i = 0; i < l1; i+= len) {
+        for (int i = 0; i < l1; i += len) {
             sb1.append(s);
         }
-        for (int i = 0; i < l2; i+=len) {
+        for (int i = 0; i < l2; i += len) {
             sb2.append(s);
         }
-        System.out.println("sb1 = " + sb1.toString());
-        System.out.println("sb2 = " + sb2.toString());
         return sb1.toString().equals(str1) && sb2.toString().equals(str2);
     }
 }
