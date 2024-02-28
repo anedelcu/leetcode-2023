@@ -8,7 +8,7 @@ class Solution {
             res = ((high - low) / 2);
         }
         else {
-            res = ((high - low + 1) / 2) + 1;
+            res = ((high - low) / 2) + 1;
         }
         return res;
     }
