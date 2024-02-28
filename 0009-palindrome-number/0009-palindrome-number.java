@@ -1,15 +1,19 @@
 class Solution {
     public boolean isPalindrome(int x) {
-        int inverse = 0;
-        int num = x;
-        if(num < 0) {
+        if(x <0) {
             return false;
         }
-        while(num > 0) {
-            inverse = (inverse * 10) + num % 10;
-            num = num / 10;
+        if( x < 10) {
+            return true;
         }
-        return inverse == x;
-        
+        int n =x;
+        int inverse = 0;
+        while(x != 0) {
+            int d = x % 10;
+            inverse = inverse * 10 + d;
+            x /= 10;
+        }
+        System.out.println("Inverse = " + inverse);
+        return inverse == n;
     }
 }
