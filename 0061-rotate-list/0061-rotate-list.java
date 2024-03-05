@@ -13,45 +13,22 @@ class Solution {
         if(head == null || head.next == null) {
             return head;
         }
-        int size = 0;
+        int size = 1;
         ListNode curr = head;
-        while(curr != null) {
+        while(curr.next != null) {
             size++;
-            curr= curr.next;
-        }
-        int[] arr = new int[size];
-        curr = head;
-        int i = 0;
-        while(curr != null) {
-            arr[i++] = curr.val;
-            curr= curr.next;
-        }
-        rotate(arr, k);
-        ListNode res = new ListNode();
-        curr = res;
-        for(int n : arr) {
-            curr.next = new ListNode(n);
             curr = curr.next;
         }
-        return res.next;
+        k = k % size;
+        k = size - k;
+        curr.next = head;
         
-        
-    }
-    public void rotate(int[] nums, int k) {
-        k = k % nums.length;
-        int n = nums.length;
-        rotate(nums,0, n -1);
-        rotate(nums, 0, k -1);
-        rotate(nums, k, n- 1);
-    }
-    
-    private void rotate(int[] nums, int left, int right) {
-        while(left < right) {
-            int temp = nums[left];
-            nums[left] = nums[right];
-            nums[right] = temp;
-            left++;
-            right--;
+        while(k > 0) {
+            curr = curr.next;
+            k--;
         }
+        head = curr.next;
+        curr.next = null;
+        return head;
     }
 }
