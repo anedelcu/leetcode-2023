@@ -3,7 +3,6 @@ class Solution {
     public int removeElement(int[] nums, int val) {
         int i = 0;
         int j = 0;
-        int k = 0;
         while (j < nums.length) {
             while (j < nums.length && nums[j] == val) {
                 j++;
@@ -12,10 +11,9 @@ class Solution {
                 nums[i] = nums[j];
             i++;
             j++;
-            k++;
             }
             
         }
-        return k;
+        return i;
     }
 }
