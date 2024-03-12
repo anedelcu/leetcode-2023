@@ -11,7 +11,6 @@ class Solution {
                 stack.push((int)res);
             }
             else if(op == 1) {
-                System.out.println(Math.floor(stack.peek()));
                 res = Math.floor(stack.pop() / n);
                 stack.push((int)res);
             }
@@ -28,7 +27,6 @@ class Solution {
         }
         res = 0;
         while(!stack.isEmpty()) {
-            System.out.println(stack.peek());
             res += stack.pop();
         }
         return (int)res;
