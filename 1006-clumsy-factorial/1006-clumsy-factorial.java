@@ -1,28 +1,36 @@
 class Solution {
     public int clumsy(int n) {
-        Stack<Integer> stack = new Stack();
-        stack.push(n);
-        for(int  i = n - 1, j = 0; i > 0; i--, j++) {
-            if(j % 4 == 0) {
-                int res = stack.pop() * i;
-                stack.push(res);
+        double res = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(n--);
+        int op = 0;
+        while(n > 0) {
+            
+            if(op == 0) {
+                res = stack.pop() * n;
+                stack.push((int)res);
             }
-            else if(j % 4 == 1) {
-                int res = stack.pop() / i;
-                stack.push(res);
+            else if(op == 1) {
+                System.out.println(Math.floor(stack.peek()));
+                res = Math.floor(stack.pop() / n);
+                stack.push((int)res);
             }
-            else if(j % 4 == 2) {
-                stack.push(i);
+            else if(op == 2) {
+                stack.push(n);
             }
             else {
-                stack.push(-i);
+                stack.push(-1*n);
             }
+            op++;
+            op = op % 4;
+            n--;
+           
         }
-        int sum = 0;
+        res = 0;
         while(!stack.isEmpty()) {
-            sum += stack.pop();
+            System.out.println(stack.peek());
+            res += stack.pop();
         }
-        return sum;
-        
+        return (int)res;
     }
 }
